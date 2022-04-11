@@ -1,5 +1,5 @@
 import  styled  from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Template = styled.div`
   display: flex;
@@ -86,6 +86,7 @@ function App(){
     setTodoArr((i) => [todoObj.todo, ...i]);
     // console.log(todoObj);
     setTodo("") ;
+    inputRef.current.focus();
   };
 
 
@@ -95,7 +96,7 @@ function App(){
     let gotodone = arr.splice(i,1);
     setDoneArr((e)=>[gotodone,...e]);
     }
-    
+    inputRef.current.focus();
   };//완료
 
   const Undo = (arr,i )=> {
@@ -103,6 +104,7 @@ function App(){
       arr.splice(i,1);
     setTodoArr((i)=>[...arr]);
   }
+  inputRef.current.focus();
   };//삭제
 
   const Edit=(arr,i)=>{
@@ -111,14 +113,18 @@ function App(){
     else{
       arr.splice(i,1,editedTodo)
       setTodoArr(()=>[...arr])
+      inputRef.current.focus();
     }
   }//수정
+ 
+  const inputRef = useRef();
+ useEffect(()=>(inputRef.current.focus()),[]);
   return (
     <Template>
     <Wrapper>
       <Title>TO DO LIST</Title>
       <form onSubmit={Add}>
-        <Input onChange={Typing} placeholder="To Do" type="text" value={todo} />
+        <Input ref={inputRef} onChange={Typing} placeholder="To Do" type="text" value={todo} />
         <AddButton>
         <span className="material-icons">
           add_circle_outline
