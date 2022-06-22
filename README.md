@@ -11,3 +11,7 @@ To Do List 필요한 태그 button,input,,ul,li,div object 를 만들어 문자�
 완료 boolean을 따로 useState로 만들어서 시도 출력하는 배열에 object를 담고 출력은 object안에 입력 값만 출력 배열에 obj를 담으니 다른 부분에서 문제가 생긴다.
 
  done list를 만들어 완료 버튼을 클릭하면 해당 문자열을 donelist로 보내는 것으로 수정
+
+22/06/23
+----
+지금 생각해보니 UseContext같은 방법을 이용하면 될 것 같다.
