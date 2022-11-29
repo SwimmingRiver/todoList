@@ -83,8 +83,7 @@ function App(){
   const Add = (e) => {
     e.preventDefault();
     if(todo === ""){return}
-    setTodoArr((i) => [todoObj.todo, ...i]);
-    // console.log(todoObj);
+    setTodoArr((i) => [todoObj.todo, ...i]);;
     setTodo("") ;
     inputRef.current.focus();
   };
