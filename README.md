@@ -11,8 +11,9 @@
 <img src="./image/update.gif" width="300px" ></img>
 - #### To Do 삭제하기
 <img src="./image/delete.gif" width="300px" ></img>
-
+ =====
 ### 후기
+ -----
 #### 리액트를 접하고 처음으로 혼자 만들어 본 ToDoList 
 
 #### useState에서 state를 정수,문자,boolean으로만 사용해봤는데, 처음으로 객체를 사용해봤고, 리액트 사용법외에도 리액트 관련 정보를 찾는 법도 알게된 것 같다.
