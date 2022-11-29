@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # To Do List
 
 #### 리액트를 이용하여 만든 to do list 
