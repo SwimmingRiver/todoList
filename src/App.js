@@ -8,20 +8,28 @@ import { Input,Button,FormControl,Alert,
 import {AddIcon} from '@chakra-ui/icons'
 import { useSelector,useDispatch } from 'react-redux';
 import { todoSlice } from './reducer/reducer';
+
 const Wrapper = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
 
 `;
-const List = styled.div`
-  width:20vw;
+const ListWrapper = styled.div`
+  width:35vw;
+  height:30vh;
+  border:solid 1px black;
   border-radius:10px;
   display:flex;
   flex-direction:column;
   align-items:center;
 `;
-
+const List = styled.ul`
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  width:30vw;
+`;
 function App() {
   const {todo,doing,done}=useSelector((state)=>state.todoSlice);
   const dispatch = useDispatch();
@@ -75,32 +83,32 @@ function App() {
         
       </div>
 
-      <List>
+      <ListWrapper>
         <h2>todo</h2>
-        <ul>
+        <List>
           {todo.map((value,index)=>
           <TodoCard value={value}  index={index} key={index}/>
 
             )}
-        </ul>
-      </List>
+        </List>
+      </ListWrapper>
 
-      <List>
+      <ListWrapper>
         <h2>doing</h2>
-        <ul>
+        <List>
           {doing.map((value,index)=>
             <TodoCard value={value}  index={index} key={index}/>
           )}
-        </ul>
-      </List>
-      <List>
+        </List>
+      </ListWrapper>
+      <ListWrapper>
         <h2>done</h2>
-        <ul>
+        <List>
           {done.map((value,index)=>
           <TodoCard value={value}  index={index} key={index}/>
             )}
-        </ul>
-      </List>
+        </List>
+      </ListWrapper>
       
     </Wrapper>
   );

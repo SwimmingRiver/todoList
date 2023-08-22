@@ -1,8 +1,9 @@
-import { Card, CardHeader, CardBody, CardFooter ,Button,Box} from '@chakra-ui/react'
+import { Card,CardBody ,Button} from '@chakra-ui/react'
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { todoSlice } from './reducer/reducer';
-import { EditIcon,DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon,DeleteIcon ,CheckIcon,DragHandleIcon} from '@chakra-ui/icons';
+import {Draggable} from 'react-beautiful-dnd';
 const Wrapper = styled.div`
 
     border-radius:10px;
@@ -20,11 +21,20 @@ const StyledCard = styled(Card)`
     height:10vh;
 `;
 const CardContent =styled.div`
-        display:flex;
-`;
+      display:flex;
 
+      justify-content:space-between;
+`;
+const Title = styled.h1`
+    text-align:center;  
+    width:15vw;
+
+`;
+const ButtonGroup = styled.div`
+
+`;
 const TodoCard=(props)=>{
-    const {todo,doing,done} = useSelector((state)=>state.todoSlice);
+    const {todo,doing} = useSelector((state)=>state.todoSlice);
     const dispatch = useDispatch();
 
     const EDIT_Todo=()=>{
@@ -46,28 +56,32 @@ const TodoCard=(props)=>{
         dispatch(todoSlice.actions.ADD_DONE({index:props.index}));
       }
     return (
+
     <Wrapper>
 
         <StyledCard>
-        <CardBody size='xs'>
-            <h1>{props.value}</h1>
+        {/* <CardBody size='xs'> */}
             <CardContent>
+            <Title>{props.value}</Title>
 
-            <div>
-            {doing.includes(props.value)?<Button onClick={ADD_Done}>Done</Button>:todo.includes(props.value)?<Button onClick={ADD_Doing}>Doing</Button>:null}
-            </div>
+            <ButtonGroup>
+            {doing.includes(props.value)?<Button onClick={ADD_Done}><CheckIcon></CheckIcon></Button>:todo.includes(props.value)?<Button onClick={ADD_Doing}><CheckIcon/></Button>:null}
+            </ButtonGroup>
             {todo.includes(props.value)?(
-                <div>
+                <ButtonGroup>
                     <Button onClick={EDIT_Todo}><EditIcon/></Button>
                     <Button onClick={DELETE_Todo}><DeleteIcon/></Button>
-                </div>
+                </ButtonGroup>
             ):null
         }
-            
+                   <DragHandleIcon/>
         </CardContent>
-        </CardBody>
+        {/* </CardBody> */}
+ 
         </StyledCard>
 
-    </Wrapper>)
+    </Wrapper>
+
+    )
 }
 export default TodoCard;
