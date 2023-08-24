@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>ToDoList</title>
 </head>
 <body>
-    <div>
-        <h1 id="title">ToDoList</h1>
-        <input id="input" placeholder="write"/>
-        <button id="add">add</button>
+    <div id="background">
+        <h1 id="title">To Do List</h1>
+        <div id="input-div">
+            <input id="input" placeholder="write"/>
+            <button id="add"><span class="material-symbols-outlined">
+
+            add
+            </span></button>
+        </div>
+            
         <ul id="list"></ul>
     </div>
     <script src="script.js"></script>

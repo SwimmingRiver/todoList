@@ -1,0 +1,52 @@
+html{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color:#e27680 ;
+}
+#background{
+    margin-top: -10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#title{
+    color: #fff;
+}
+#list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    list-style: none;
+    width: 40vw;
+    height: 100%;
+    margin-left: 40vw;
+}
+#input-div{
+    
+}
+#todo-box{
+    display: grid;
+    grid-template-columns: 2vw 10vw 4vw 4vw;
+
+    background-color: #fff;
+    width: 20vw;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+#button-in-box{
+    width: 4vw;
+    height: 6vh;
+    background-color: #fff;
+    border: none;
+    outline: none;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+  
+}
