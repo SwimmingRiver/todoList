@@ -15,7 +15,7 @@ const ShowTodoList=()=>{
     listItem.innerHTML=`<span key=${index}
     <input type="checkbox">
     <p>${value}</p>
-    <button>Edit</button>
+    <button onclick={EditToDo(${index})}>Edit</button>
     <button onclick={DeleteToDo(${index})}>delete</button>
     </span>`;
     list.appendChild(listItem);
@@ -33,10 +33,19 @@ const AddToDo=()=>{
 };//입력값 리스트에 추가하기
 
 const DeleteToDo =(index)=>{
+    let check = confirm(`${arr[index]}를 삭제하시겠습니까?`);
+    if(check){
     arr.splice(index,1);
     localStorage.setItem("todoList",JSON.stringify(arr));
+    ShowTodoList()}
+};//삭제하기
+
+const EditToDo =(index)=>{
+    let edtied = prompt(`${arr[index]}를 수정하시겠습니까?`,`${arr[index]}`);
+    arr.splice(index,1,edtied);
+    localStorage.setItem("todoList",JSON.stringify(arr));
     ShowTodoList();
-}
+};//수정하기
 
 
 LoadToDo();
