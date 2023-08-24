@@ -1,11 +1,13 @@
-html{
+body{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     background-color:#e27680 ;
+    font-family: 'Bebas Neue', sans-serif;
+font-family: 'Nanum Gothic', sans-serif;
 }
-#background{
+#wrapper{
     margin-top: -10px;
     display: flex;
     flex-direction: column;
@@ -24,16 +26,26 @@ html{
     margin-left: 40vw;
 }
 #input-div{
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #todo-box{
+    margin-left: -50px;
     display: grid;
     grid-template-columns: 2vw 10vw 4vw 4vw;
-
     background-color: #fff;
-    width: 20vw;
+    width: 18vw;
     border-radius: 12px;
     margin-bottom: 20px;
+}
+#add{
+    margin-left: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 #button-in-box{
     width: 4vw;
@@ -41,6 +53,19 @@ html{
     background-color: #fff;
     border: none;
     outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#inputVal{
+    height: 3vh;
+    border-top: -100px;
+    border-radius: 5px;
+}
+#check-box{
+    cursor: pointer;
+}
+#todo-value{
+    overflow: auto;
 }
 .material-symbols-outlined {
   font-variation-settings:
