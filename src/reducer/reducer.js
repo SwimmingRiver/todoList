@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {  
-    todo:[],
+    todo:["Say Hi"],
     doing:[],
     done:[]
 };
@@ -18,12 +18,12 @@ export const todoSlice = createSlice({
             state.todo.splice(action.payload.index,1);
         },
         ADD_DOING:(state,action)=>{
-            state.doing.unshift(state.todo[action.payload.index]);
-            state.todo.splice(action.payload.index,1);
+            state.doing.unshift(state.todo[action.payload]);
+            state.todo.splice(action.payload,1);
         },
         ADD_DONE:(state,action)=>{
-            state.done.unshift(state.doing[action.payload.index]);
-            state.doing.splice(action.payload.index,1);
+            state.done.unshift(state.doing[action.payload]);
+            state.doing.splice(action.payload,1);
         },
     }
 })

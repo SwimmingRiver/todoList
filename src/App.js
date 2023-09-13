@@ -8,21 +8,25 @@ import { Input,Button,FormControl,Alert,
 import {AddIcon} from '@chakra-ui/icons'
 import { useSelector,useDispatch } from 'react-redux';
 import { todoSlice } from './reducer/reducer';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 const Wrapper = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
+  background-color:#dce9fe;
 
 `;
 const ListWrapper = styled.div`
   width:35vw;
   height:30vh;
-  border:solid 1px black;
   border-radius:10px;
   display:flex;
   flex-direction:column;
   align-items:center;
+  background-color:#fff; 
+  margin-bottom:10px;
+  overflow:auto;
 `;
 const List = styled.ul`
   display:flex;
@@ -54,16 +58,30 @@ function App() {
       setErrorObj({nullError:false,sameError:false});
   };
   
+  const onDragEnd=(e)=>{
+  console.log(e)
+  if(!e.destination){return }
+  if(e.destination.droppableId==="doing"){
+    dispatch(todoSlice.actions.ADD_DOING(e.source.index));
+  }
+  if(e.destination.droppableId==="done"){
+    dispatch(todoSlice.actions.ADD_DONE(e.source.index));
+  }
+  };
 
   
   return (
+    
+
     <Wrapper>
       <h1 id='title'>TO DO LIST</h1>
       <div>
         <form onSubmit={ADD_Todo}>
         <FormControl >
-      <Input placeholder='write to do!!' onChange={(e)=>{setInputValue(e.target.value)}} value={inputValue}/>
-      <Button type='submit' colorScheme='teal'>add<AddIcon/></Button>
+          <div style={{display:'flex' ,flexDirection:'column',alignItems:'center'}}>
+      <Input autoFocus placeholder='write to do!!' onChange={(e)=>{setInputValue(e.target.value)}} value={inputValue}/>
+      <Button style={{marginLeft:"30px"}} type='submit' colorScheme='teal'>add<AddIcon/></Button>
+          </div>
         </FormControl>
         </form>
         {errorObj.nullError?(
@@ -83,34 +101,105 @@ function App() {
         
       </div>
 
-      <ListWrapper>
-        <h2>todo</h2>
-        <List>
-          {todo.map((value,index)=>
-          <TodoCard value={value}  index={index} key={index}/>
+      <DragDropContext onDragEnd={onDragEnd}>
 
+      <Droppable droppableId="todo">
+        {(provided,snapshot)=> (
+          <div className="todo" ref={provided.innerRef} {...provided.droppableProps}>
+
+          <ListWrapper >
+          <h2>todo</h2>
+          <List >
+          {
+          todo.map((value,index)=>(
+          <Draggable key={`card_${value}`} draggableId={`card_${value}`} index={index}>
+             {(provided)=> (
+              <div
+              className={`card_${value}`} 
+             ref={provided.innerRef} 
+             {...provided.draggableProps}
+            {...provided.dragHandleProps} >
+             <TodoCard value={value}  index={index} key={index}/>
+                
+              </div>
+            
             )}
-        </List>
-      </ListWrapper>
 
-      <ListWrapper>
-        <h2>doing</h2>
-        <List>
-          {doing.map((value,index)=>
-            <TodoCard value={value}  index={index} key={index}/>
+          </Draggable>)
+              )}
+            </List>
+          </ListWrapper>
+          </div>
           )}
-        </List>
-      </ListWrapper>
-      <ListWrapper>
-        <h2>done</h2>
-        <List>
-          {done.map((value,index)=>
-          <TodoCard value={value}  index={index} key={index}/>
+        </Droppable>
+
+     <Droppable droppableId='doing'>
+
+      {(provided)=>(
+        <div className='doing' ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps}>
+         <ListWrapper >
+          <h2>doing</h2>
+          <List >
+          {
+          doing.map((value,index)=>(
+          <Draggable key={`card_${value}`} draggableId={`card_${value}`} index={index}>
+             {(provided)=> (
+              <div
+              className={`card_${value}`} 
+             ref={provided.innerRef} 
+             {...provided.draggableProps}
+            {...provided.dragHandleProps} >
+             <TodoCard value={value} index={index} key={index}/>
+                
+              </div>
+            
             )}
-        </List>
-      </ListWrapper>
-      
+
+          </Draggable>)
+              )}
+            </List>
+          </ListWrapper>
+
+
+        </div>
+         
+      )}
+      </Droppable>
+      <Droppable droppableId='done'>
+      {(provided)=>(
+      <div ref={provided.innerRef}{...provided.droppableProps}>
+      <ListWrapper >
+          <h2>done</h2>
+          <List >
+          {
+          done.map((value,index)=>(
+          <Draggable key={`card_${value}`} draggableId={`card_${value}`} index={index}>
+             {(provided)=> (
+              <div
+              className={`card_${value}`} 
+             ref={provided.innerRef} 
+             {...provided.draggableProps}
+            {...provided.dragHandleProps} >
+             <TodoCard value={value}  index={index} key={index}/>
+                
+              </div>
+            
+            )}
+
+          </Draggable>)
+              )}
+            </List>
+          </ListWrapper>
+
+
+      </div>
+      )}
+      </Droppable>
+
+      </DragDropContext>
     </Wrapper>
+    
+
   );
 }
 

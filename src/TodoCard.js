@@ -1,14 +1,16 @@
-import { Card,CardBody ,Button} from '@chakra-ui/react'
+import { Card,Button} from '@chakra-ui/react'
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { todoSlice } from './reducer/reducer';
 import { EditIcon,DeleteIcon ,CheckIcon,DragHandleIcon} from '@chakra-ui/icons';
-import {Draggable} from 'react-beautiful-dnd';
+
+
+
 const Wrapper = styled.div`
 
     border-radius:10px;
     background-color:#F8F4E3;
-    width:20vw;
+    width:30vw;
        &:hover{
         transition: 0.4s;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
@@ -19,6 +21,7 @@ const StyledCard = styled(Card)`
     background-color:#F8F4E3; 
     width:30vw;
     height:10vh;
+
 `;
 const CardContent =styled.div`
       display:flex;
@@ -50,20 +53,17 @@ const TodoCard=(props)=>{
         }
       };
       const ADD_Doing=()=>{
-        dispatch(todoSlice.actions.ADD_DOING({index:props.index}));
+        dispatch(todoSlice.actions.ADD_DOING(props.index));
       }
       const ADD_Done=()=>{
         dispatch(todoSlice.actions.ADD_DONE({index:props.index}));
       }
     return (
 
-    <Wrapper>
-
-        <StyledCard>
-        {/* <CardBody size='xs'> */}
+            <Wrapper>
+        <StyledCard >
             <CardContent>
             <Title>{props.value}</Title>
-
             <ButtonGroup>
             {doing.includes(props.value)?<Button onClick={ADD_Done}><CheckIcon></CheckIcon></Button>:todo.includes(props.value)?<Button onClick={ADD_Doing}><CheckIcon/></Button>:null}
             </ButtonGroup>
@@ -74,13 +74,12 @@ const TodoCard=(props)=>{
                 </ButtonGroup>
             ):null
         }
-                   <DragHandleIcon/>
+        <DragHandleIcon/>
         </CardContent>
-        {/* </CardBody> */}
- 
         </StyledCard>
 
     </Wrapper>
+
 
     )
 }
