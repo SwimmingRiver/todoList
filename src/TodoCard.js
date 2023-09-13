@@ -56,7 +56,7 @@ const TodoCard=(props)=>{
         dispatch(todoSlice.actions.ADD_DOING(props.index));
       }
       const ADD_Done=()=>{
-        dispatch(todoSlice.actions.ADD_DONE({index:props.index}));
+        dispatch(todoSlice.actions.ADD_DONE(props.index));
       }
     return (
 
