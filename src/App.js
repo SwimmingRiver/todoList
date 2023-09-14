@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import TodoCard from './TodoCard';
 import styled from 'styled-components';
 import { Input,Button,FormControl,Alert,
@@ -69,7 +69,12 @@ function App() {
   }
   };
 
-  
+  const localData = JSON.parse(localStorage.getItem('todolist'))||{todo:[],doing:[],done:[]};
+  const [localTodo,setLocalTodo]=useState(localData);
+  useEffect(()=>{
+    localStorage.setItem('todolist',JSON.stringify(localData));
+
+  },[localTodo])
   return (
     
 
